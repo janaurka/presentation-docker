@@ -21,6 +21,8 @@
         background: #e7e8e2;
         border-radius: 5px;
       }
+
+
     </style>
   </head>
   <body>
@@ -56,16 +58,16 @@ class: center, middle, .left
 
 # Technique
 
-
-
 .center[![IBM already did that in 1960](pic/mainframe.jpg)]
 
 ---
 
+# Nothing new
+
+.center[![Container services](pic/old-containers.jpg)]
+
+
 # What looks good?
-
-* 
-
 
 ---
 
@@ -87,18 +89,15 @@ This might be a good thing, *but*:
 * Do you really want to debug this?
 
 
-
-
 ---
 
 # Examples
 
 Official PHP Container (Downloads: 163415)
-```
-  && curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
-  && curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2.asc/from/this/mirror" -o php.tar.bz2.asc \
-  && gpg --verify php.tar.bz2.asc \
-```
+
+.center[![Port of the Dockerfile](./pic/php-container.png)]
+
+
 
 Wordpress Container from Appcontainers (Downloads: 12434)
 
@@ -106,35 +105,92 @@ Wordpress Container from Appcontainers (Downloads: 12434)
 
 ---
 
-# Add complexity
+# What to do?
 
+* Create your own lightweight containers
+  * Pull from a distribution Image like Ubuntu or CentOS. *Do not* use 3rd Parties.
+* Install exactly the things you need and do that properly
+  * Use `apt-get`, `yum` or whatever the distribution gives you. Only compile if you know *exactly* what you are doing
 
-To dockerize an application is just the beginning. (Think as dev deployment)
 
 ---
 
-# Dev -> Stag -> Prod
+# It’s getting complex
 
-|Level|Traditional|Cloud|Containers|
-|---|---|---|---|---|
-|dev|Testsystem|Testsystem|Container|
-|stag|Production-like Environment|Production-like Environment|   |   |
-|prod|Cluster|Cluster|Container in VM||
+### Base requirements
+
+Allows us to create, maintain and run a container:
+
+* Linux Kernel >= 3.8 and a container-daemon (docker, rkt, etc.) or tool
+
+Note: This is just the beginning.
 
 ---
 
-# Production?
-Make it (near) production ready requires a brand new stack.
+### Further requirements
+
+For a production (near) enviroment, we need:
+
+* Networking
+* Monitoring
+* Fail-Over
+* Clustering
+
+(and this is just the absolute minimum)
+
+---
+
+### Using CoreOS
+
+
 
 .center[![CoreOS OSI Layer](./pic/osi-model-clustering.svg)]
 
 
 ---
 
+### The way Google does it
+
+.center[![Google’s Kubernetes](pic/kubernetes.jpeg)]
+
+
+---
+
+### Possible solutions
+
+_Use a service:_
+
+* Google Container Service
+* Amazon EC2 Container Service
+
+Problems:
+
+* Complete Vendor lockin
+* Debugging will be a massive PITA
+* These services seem to be early beta (ask Marcus, he was at the AWS Summit :) )
+
+---
+
+### Possible solutions
+
+_Do it yourself:_
+
+* CoreOS
+* (various others)
+* use your favorite Distro and use the services you‘d like
+
+Problems:
+
+* Huge effort
+* These services are brand new and not-so-well battletested as we’d like to have
+* Building this in the cloud = Cloud²
+
+---
+
 #My opinion
 
 * Containers are cool and might (probably are) the future.
-* Containerize *everything* is a bad idea. 
+* Containerize *everything* is a bad idea.
   * Use the technology that fits best!
 
 ---
