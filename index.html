@@ -13,7 +13,14 @@
         font-family: 'Lato';
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+      }
+      .remark-code-line-highlighted { background-color: #373832; }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -31,7 +38,7 @@ class: center, middle, .left
 # Agenda
 
 1. Motivation
-1. Short introducion in containers
+1. Technique
 2. What looks good?
 3. Cons | Problems | Rants
 4. My opinion about the use of Docker
@@ -47,7 +54,17 @@ class: center, middle, .left
 
 ---
 
+# Technique
+
+
+
+.center[![IBM already did that in 1960](pic/mainframe.jpg)]
+
+---
+
 # What looks good?
+
+* 
 
 
 ---
@@ -55,6 +72,86 @@ class: center, middle, .left
 # The dark side
 
 .center[![cons](pic/docker-cons.png)]
+
+---
+
+# There is already a container for that
+
+This might be a good thing, *but*:
+
+* You loose control
+* You have to trust others
+  * Bad practices?
+  * Security?
+* You cannot control updates / changes
+* Do you really want to debug this?
+
+
+
+
+---
+
+# Examples
+
+Official PHP Container (Downloads: 163415)
+```
+  && curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
+  && curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2.asc/from/this/mirror" -o php.tar.bz2.asc \
+  && gpg --verify php.tar.bz2.asc \
+```
+
+Wordpress Container from Appcontainers (Downloads: 12434)
+
+.center[![Appcontrol-Wordpress Container](./pic/appcontainers-wp.png)]
+
+---
+
+# Add complexity
+
+
+To dockerize an application is just the beginning. (Think as dev deployment)
+
+---
+
+# Dev -> Stag -> Prod
+
+|Level|Traditional|Cloud|Containers|
+|---|---|---|---|---|
+|dev|Testsystem|Testsystem|Container|
+|stag|Production-like Environment|Production-like Environment|   |   |
+|prod|Cluster|Cluster|Container in VM||
+
+---
+
+# Production?
+Make it (near) production ready requires a brand new stack.
+
+.center[![CoreOS OSI Layer](./pic/osi-model-clustering.svg)]
+
+
+---
+
+#My opinion
+
+* Containers are cool and might (probably are) the future.
+* Containerize *everything* is a bad idea. 
+  * Use the technology that fits best!
+
+---
+
+# Things you should have in mind when using containers
+
+* Build your own Containers
+  * Base: Ubuntu, CentOS, whatever. Use official (read from the OS-Manufacturer) Containers.
+  * Have security in mind
+  * Only use applications that support stateless-systems
+  * Have a good plan to keep your data safe (also in terms of integrity, movable
+
+---
+
+# Further readings
+
+* [Containerize your Infrastructure](https://5pi.de/2015/01/08/containerized-infrastructure/)
 
 
 
