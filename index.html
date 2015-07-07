@@ -31,26 +31,12 @@
 class: center, middle
 
 # Docker
-## Pros vs Cons
+## Let’s have a look
 
 ---
+# Internet: Shall we use containers?
 
-class: center, middle, .left
-
-# Agenda
-
-1. Motivation
-1. Technique
-2. What looks good?
-3. Cons | Problems | Rants
-4. My opinion about the use of Docker
-
----
-
-# Motivation
-
-* Containers (read NoDocker) seems to the new #1 in hipster bullshit bingo
-* Containerize it! seems to be the new answer to every DevOps problem
+--
 
 .center[![Containerize all](pic/docker-all-the-things.png)]
 
@@ -62,22 +48,55 @@ class: center, middle, .left
 
 ---
 
-# Nothing new
+# Really kinda old
 
 .center[![Container services](pic/old-containers.jpg)]
 
+---
+
+# What do we need?
+
+To create, maintain and run a container:
+
+* Linux Kernel >= 3.8
+* Container-daemon or tool
+  * docker, rkt, libcontainer, runC, appC, (whatever)
+
+---
 
 # What looks good?
+
+* Gets adopted widely
+* The big players have jumped onto the train
+* Massive devolopment and research ongoin
+* Probably the next big thing
+
+
+.center[![Everyone is using it](./pic/otp.png)]
+
+???
+
+Docker seems to be THE future.
+
+Keep in mind, that it’s a new technology.
 
 ---
 
 # The dark side
 
+--
+
 .center[![cons](pic/docker-cons.png)]
+
+???
+
+Let’s have some examples
 
 ---
 
-# There is already a container for that
+# Central Hub
+
+### There is already a container for that
 
 This might be a good thing, *but*:
 
@@ -93,11 +112,18 @@ This might be a good thing, *but*:
 
 # Examples
 
+--
 Official PHP Container (Downloads: 163415)
 
-.center[![Port of the Dockerfile](./pic/php-container.png)]
+<section>
+    <pre><code data-trim>
+  curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2" -o php.tar.bz2
+  curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2.asc" -o php.tar.bz2.asc
+  gpg --verify php.tar.bz2.asc
+    </code></pre>
+</section>
 
-
+--
 
 Wordpress Container from Appcontainers (Downloads: 12434)
 
@@ -108,22 +134,48 @@ Wordpress Container from Appcontainers (Downloads: 12434)
 # What to do?
 
 * Create your own lightweight containers
-  * Pull from a distribution Image like Ubuntu or CentOS. *Do not* use 3rd Parties.
+  * Pull from a distribution Image like Ubuntu or CentOS. *Do not* use 3rd party containers.
 * Install exactly the things you need and do that properly
   * Use `apt-get`, `yum` or whatever the distribution gives you. Only compile if you know *exactly* what you are doing
 
 
 ---
 
+# Technique Part 2
+
 # It’s getting complex
 
 ### Base requirements
 
-Allows us to create, maintain and run a container:
+To create, maintain and run a container:
 
 * Linux Kernel >= 3.8 and a container-daemon (docker, rkt, etc.) or tool
 
-Note: This is just the beginning.
+---
+
+class: middle
+
+.center[![There is more](./pic/more.jpg)]
+
+---
+
+### Further requirements
+
+Non-Linux Users:
+
+* Install a VM which runs Linux and pass through some traffic/signals/stuff.
+
+???
+
+It’s a bit more complicatet then just start and run
+
+--
+
+.center[![Go wrong](./pic/go-wrong.png)]
+
+--
+
+It’s probably a better solution to run a docker cluster somewhere inhouse.
 
 ---
 
@@ -132,11 +184,35 @@ Note: This is just the beginning.
 For a production (near) enviroment, we need:
 
 * Networking
+  * Routing, Addresses, Locations
 * Monitoring
+  * Is it still alive?
 * Fail-Over
+  * Well, our host panic'ed and everything went south
 * Clustering
+  * There should be more then one instance
+
+
+--
 
 (and this is just the absolute minimum)
+
+
+---
+
+### Possible solutions
+
+_Use a service:_
+
+* Google Container Service (Kubernetes)
+* Amazon EC2 Container Service
+
+Problems:
+
+* Complete Vendor lockin
+* Debugging will be a massive PITA
+* These services seem to be early beta (ask Marcus, he was at the AWS Summit :) )
+
 
 ---
 
@@ -158,25 +234,11 @@ For a production (near) enviroment, we need:
 
 ### Possible solutions
 
-_Use a service:_
-
-* Google Container Service
-* Amazon EC2 Container Service
-
-Problems:
-
-* Complete Vendor lockin
-* Debugging will be a massive PITA
-* These services seem to be early beta (ask Marcus, he was at the AWS Summit :) )
-
----
-
-### Possible solutions
-
 _Do it yourself:_
 
 * CoreOS
-* (various others)
+* Mesos
+* (more)
 * use your favorite Distro and use the services you‘d like
 
 Problems:
@@ -184,14 +246,6 @@ Problems:
 * Huge effort
 * These services are brand new and not-so-well battletested as we’d like to have
 * Building this in the cloud = Cloud²
-
----
-
-#My opinion
-
-* Containers are cool and might (probably are) the future.
-* Containerize *everything* is a bad idea.
-  * Use the technology that fits best!
 
 ---
 
@@ -205,11 +259,9 @@ Problems:
 
 ---
 
-# Further readings
+class: middle, center
 
-* [Containerize your Infrastructure](https://5pi.de/2015/01/08/containerized-infrastructure/)
-
-
+# Questions?
 
     </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
