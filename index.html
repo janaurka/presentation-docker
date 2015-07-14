@@ -60,7 +60,15 @@ To create, maintain and run a container:
 
 * Linux Kernel >= 3.8
 * Container-daemon or tool
-  * docker, rkt, libcontainer, runC, appC, (whatever)
+  * docker, rkt, runC, appC, (whatever)
+      * running on a hypervisor like
+          * lxc, lxd, libcontainer
+
+???
+
+Docker uses isolation features from the Linux kernel:
+* cgroups
+* namespaces
 
 ---
 
@@ -78,11 +86,17 @@ To create, maintain and run a container:
 
 Docker seems to be THE future.
 
-Keep in mind, that it’s a new technology.
+Keep in mind, that it’s a new technology. The technic gets adopted by the big players und startups, because they are able to build upon and have the capicities.
+
+Turning a running application into Docker containers is not a fairly easy thing to do.
 
 ---
 
 # The dark side
+
+???
+
+Note that Docker seems to be the future. The technology seems to be fine. but there is a this _hipster_ hype shit, which comes with a whole bunch of problems.
 
 --
 
@@ -96,7 +110,18 @@ Let’s have some examples
 
 # Not like this
 
-.center[![not like this](./pic/fail.gif)]
+.center[![not like this](./pic/fail.gif
+
+???
+
+Things we want:
+
+* a straight forward process from dev to prod
+* a stable enviroment
+* a fast and stable deployment
+* security
+
+Technology decisions should not be "we need that techniques, that’s why we build it that way". It should be the other way round.
 
 ---
 
@@ -112,6 +137,12 @@ This might be a good thing, *but*:
   * Security?
 * You cannot control updates / changes
 * Do you really want to debug this?
+
+???
+
+Everyone can upload public containers to the Docker Hub.
+
+Sometimes you can view the Dockerfile. Sometimes not.
 
 
 ---
@@ -129,11 +160,20 @@ Official PHP Container (Downloads: 163415)
     </code></pre>
 </section>
 
+???
+
+Pulling the Version via HTTP + the Key from the very same FTP and verify the signature. This is just plain stupid.
+
+
 --
 
 Wordpress Container from Appcontainers (Downloads: 12434)
 
 .center[![Appcontrol-Wordpress Container](./pic/appcontainers-wp.png)]
+
+???
+
+Having the Database on the same Container? What about Clustering? Where is the data stored?
 
 ---
 
@@ -182,6 +222,7 @@ It’s a bit more complicatet then just start and run
 --
 
 It’s probably a better solution to run a docker cluster somewhere inhouse.
+
 
 ---
 
@@ -253,8 +294,11 @@ Problems:
 .center[![CoreOS OSI Layer](./pic/osi-model-clustering.svg)]
 
 
----
+???
 
+Alright, almost all components are brand new. Production ready? We dunno.
+
+---
 
 
 # Things you should have in mind when using containers
